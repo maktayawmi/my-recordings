@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>تسجيلات جاهزة للمشايخة</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  h1 {
+    color: #333;
+    margin: 0 0 20px 0;
+    font-size: 26px;
+  }
+  #last {
+    background-color: #fff;
+    border: 1px dashed #1a73e8;
+    color: #333;
+    font-size: 18px;
+    padding: 10px 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+  }
+  #last span {
+    color: #1a73e8;
+    font-weight: bold;
+  }
+  a {
+    display: block;
+    background-color: #ffffff;
+    color: #1a73e8;
+    text-decoration: none;
+    font-size: 22px;
+    padding: 15px 60px;
+    margin: 10px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 300px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  a:hover {
+    background-color: #e8f0fe;
+  }
+  a.last-clicked {
+    border-color: #1a73e8;
+    background-color: #e8f0fe;
+  }
+</style>
+</head>
+<body>
+
+<h1>تسجيلات جاهزة للمشايخة</h1>
+
+<div id="last">آخر رابط ضغطت عليه: <span id="lastName">لا يوجد بعد</span></div>
+
+<a href="https://www.youtube.com/playlist?list=PLWzzF688g_nhWBoII_vqw-h2p2yvx541V" target="_blank" data-name="عبدالرزاق البدر">عبدالرزاق البدر</a>
+<a href="https://www.youtube.com/playlist?list=PLWzzF688g_nhorglKsqOdvI_NUg5_3B75" target="_blank" data-name="عبدالسلام الشويعر">عبدالسلام الشويعر</a>
+<a href="https://www.youtube.com/playlist?list=PLWzzF688g_njmyyCwyrjOUUvz16l5QSGL" target="_blank" data-name="محمد الشنقيطي">محمد الشنقيطي</a>
+<a href="https://www.youtube.com/playlist?list=PLWzzF688g_ni1Eg3y2bryW4-q5bv4DjDU" target="_blank" data-name="ابن باز">ابن باز</a>
+<a href="https://www.youtube.com/playlist?list=PLWzzF688g_nhL67yIdQ-mGkMq1a1SUzWT" target="_blank" data-name="ابن عثيمين">ابن عثيمين</a>
+
+<script>
+  const links = document.querySelectorAll('a[data-name]');
+  const lastNameEl = document.getElementById('lastName');
+
+  function showLast(name) {
+    lastNameEl.textContent = name;
+    links.forEach(l => {
+      l.classList.toggle('last-clicked', l.dataset.name === name);
+    });
+  }
+
+  // استرجاع آخر رابط عند فتح الصفحة
+  const saved = localStorage.getItem('lastClicked');
+  if (saved) {
+    showLast(saved);
+  }
+
+  // حفظ الرابط عند الضغط عليه
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      localStorage.setItem('lastClicked', link.dataset.name);
+      showLast(link.dataset.name);
+    });
+  });
+</script>
+
+</body>
+</html>
